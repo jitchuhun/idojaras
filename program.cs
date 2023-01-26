@@ -19,8 +19,6 @@ namespace idojaras23
         }
         static void Main(string[] args)
         {
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-
             Console.WriteLine("Adja meg a város nevét:");
             string city = Console.ReadLine();
 
@@ -29,6 +27,7 @@ namespace idojaras23
 
             using (WebClient client = new WebClient())
             {
+                client.Encoding = Encoding.UTF8;
                 string json = client.DownloadString(url);
                 JObject weatherData = JObject.Parse(json);
 
