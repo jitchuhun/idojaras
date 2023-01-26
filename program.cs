@@ -19,6 +19,8 @@ namespace idojaras23
         }
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             Console.WriteLine("Adja meg a város nevét:");
             string city = Console.ReadLine();
 
@@ -30,12 +32,12 @@ namespace idojaras23
                 string json = client.DownloadString(url);
                 JObject weatherData = JObject.Parse(json);
 
-                Console.WriteLine("Idő: " + weatherData["weather"][0]["description"]);
-                Console.WriteLine("Naplemente: " + UnixTimeStampToDateTime((double)weatherData["sys"]["sunset"]));
-                Console.WriteLine("Napfelkelte: " + UnixTimeStampToDateTime((double)weatherData["sys"]["sunrise"]));
+                Console.WriteLine("Időjárás: " + weatherData["weather"][0]["description"]);
                 Console.WriteLine("Hőmérséklet: " + weatherData["main"]["temp"] + " °C");
                 Console.WriteLine("Páratartalom: " + weatherData["main"]["humidity"] + "%");
                 Console.WriteLine("Eső valószínűsége: " + weatherData["clouds"]["all"] + "%");
+                Console.WriteLine("Naplemente: " + UnixTimeStampToDateTime((double)weatherData["sys"]["sunset"]));
+                Console.WriteLine("Napfelkelte: " + UnixTimeStampToDateTime((double)weatherData["sys"]["sunrise"]));
             }
 
             Console.Read();
